@@ -15,6 +15,13 @@ export default factories.createCoreController('api::order.order', ({ strapi }) =
 
       /***** Rest of the code here *****/
 
+      // Checking delivery code
+      if (!isValidPostalCode(order_meta.shipping_postcode)) {
+        return {
+          error: "Codigo Postal Invalido"
+        };
+      }
+
       return {order, order_meta, authenticatedUser};
     } catch (error) {
       console.error('Error exporting orders', error);
